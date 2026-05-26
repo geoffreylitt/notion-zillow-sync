@@ -116,19 +116,31 @@ The listing image is also added at the top of the page body.
 
 ## Guidance For Agents
 
-If you are using a coding agent to test this repo, ask it to be conservative with Zillapi credits.
+If a user asks you to install this in their Notion workspace, treat it as an end-to-end setup task. Do not assume the user has command-line, TypeScript, Notion Workers, or API-key experience.
 
-A good test flow is:
+Recommended approach:
 
-1. Read `.env` without printing `ZILLAPI_KEY`.
-2. Temporarily set `ZILLOW_MAX_ITEMS=1` or `2`.
-3. Run `npm run check`.
-4. Deploy with `ntn workers deploy`.
-5. Push env with `ntn workers env push --yes`.
-6. Trigger one sync with `ntn workers sync trigger zillowListingsSync`.
-7. Check status with `ntn workers sync status zillowListingsSync --no-watch`.
+1. Explain what you are doing in plain language before each major step.
+2. Check that Node, npm, git, and the `ntn` CLI are available. Install or guide the user through installing anything missing.
+3. Help the user create a Zillapi account and find their API key. Ask them to paste the key into their local `.env` file or paste it into the chat only if they are comfortable with that.
+4. Help the user create or copy their Zillow search URL.
+5. Edit `.env` for the user. Do not make them hand-format JSON if you can safely write the file yourself.
+6. Keep `ZILLOW_MAX_ITEMS` low while testing, such as `1` or `2`, to avoid spending Zillapi credits unnecessarily.
+7. Run `npm install`, `npm run check`, and `npm run build`.
+8. Have the user run `ntn login` if authentication is needed. If the login command opens a browser or prints a code, explain exactly what they should do.
+9. Deploy with `ntn workers deploy`.
+10. Push env vars with `ntn workers env push --yes`.
+11. Trigger one sync with `ntn workers sync trigger zillowListingsSync`.
+12. Check status with `ntn workers sync status zillowListingsSync --no-watch`.
+13. Tell the user where the Notion database was created and how to open it.
 
-Avoid repeatedly triggering syncs while debugging. Each configured search calls Zillapi once per sync run.
+Important constraints for agents:
+
+- Never print the user's `ZILLAPI_KEY` back into logs or chat.
+- Avoid repeatedly triggering syncs while debugging. Each configured search calls Zillapi once per sync run.
+- If a command fails, read the error and fix the underlying issue when possible instead of handing the user a raw stack trace.
+- Prefer editing files directly for the user, especially `.env`, instead of giving abstract instructions.
+- Before finishing, verify the sync status and summarize what is deployed, what schedule it uses, and how many search URLs are configured.
 
 ## Customizing
 
