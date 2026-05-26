@@ -1,0 +1,31 @@
+{
+	"name": "notion-zillow-rentals-sync",
+	"version": "0.0.0",
+	"description": "A Notion Worker that syncs Zillow rental search results into a Notion database using Zillapi.",
+	"private": false,
+	"license": "MIT",
+	"keywords": [
+		"notion",
+		"notion-workers",
+		"zillow",
+		"zillapi",
+		"rentals",
+		"sync"
+	],
+	"scripts": {
+		"build": "tsc",
+		"check": "tsc --noEmit"
+	},
+	"engines": {
+		"node": ">=22.0.0",
+		"npm": ">=10.9.2"
+	},
+	"devDependencies": {
+		"@types/node": "^22.9.0",
+		"tsx": "^4.20.6",
+		"typescript": "^5.8.0"
+	},
+	"dependencies": {
+		"@notionhq/workers": ">=0.0.0"
+	}
+}
