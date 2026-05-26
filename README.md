@@ -1,12 +1,8 @@
 # Notion Zillow Rentals Sync
 
-## TL;DR
-
 Sync Zillow rental search results into a Notion database.
 
-This project is a Notion Worker. A worker is a small TypeScript program hosted by Notion. This worker uses the sync capability: it periodically calls Zillapi for Zillow search results and writes those listings into a managed Notion database.
-
-Zillapi is an API for Zillow data. It handles the Zillow side of the data fetch so this worker does not need to scrape Zillow pages directly. You can sign up for free, and the free tier includes up to 100 search results, which is enough to test a small search before committing to a paid plan.
+This is a [Notion Worker](https://developers.notion.com/workers/get-started/overview) that deploys to Notion to periodically run Zillow searches and sync the results into a managed Notion database. It uses [Zillapi](https://zillapi.com/), an API wrapper for Zillow (free up to 100 search results).
 
 ## Quickstart
 
